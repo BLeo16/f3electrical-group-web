@@ -2,41 +2,59 @@
 import { branding } from "../data/branding";
 import { SITE } from "../data/site";
 
-const { title = branding.name, description = branding.tagline, image = '/images/preview.jpg', url = '', noindex = false } = Astro.props;
+const {
+    title = branding.name,
+    description = branding.tagline,
+    image = "/images/logo.jpg",
+    url = "",
+    noindex = false,
+} = Astro.props;
+
 const canonical = url || Astro.url?.href || SITE.url;
 
 const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": branding.name || "F3 Electrical Group",
-  "telephone": branding.contact?.phone || "+593993437270",
-  "email": branding.contact?.email || "fernandofloreslm@hotmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": branding.location || "Imbabura, Ecuador"
-  },
-  "url": canonical || SITE.url
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: branding.name || "F3 Electrical Group",
+    telephone: branding.contact?.phone || "+593993437270",
+    email: branding.contact?.email || "fernandofloreslm@hotmail.com",
+    address: {
+        "@type": "PostalAddress",
+        addressLocality: branding.location || "Imbabura, Ecuador",
+    },
+    url: canonical || SITE.url,
 };
 ---
 
 <head>
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  {noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow" />}
-  {canonical ? <link rel="canonical" href={canonical} /> : null}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {
+        noindex ? (
+            <meta name="robots" content="noindex,nofollow" />
+        ) : (
+            <meta name="robots" content="index,follow" />
+        )
+    }
+    {canonical && <link rel="canonical" href={canonical} />}
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
-  {canonical ? <meta property="og:url" content={canonical} /> : null}
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    {canonical && <meta property="og:url" content={canonical} />}
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={image} />
+    <!-- Twitter -->
+    <meta
+        name="twitter:card"
+        content={image ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 
-  <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+    <!-- JSON-LD Schema (ahora correcto) -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
 </head>
