@@ -1,0 +1,21 @@
+---
+import { SITE } from "../data/site";
+
+const base = SITE.url || 'https://tusitio.com';
+const pages = [
+  { url: '/', priority: 1.0 },
+  { url: '/servicios', priority: 0.8 },
+  { url: '/nosotros', priority: 0.8 }
+];
+
+// If you have dynamic routes you can extend this list programmatically
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {pages.map(p => (
+    <url>
+      <loc>{base + p.url}</loc>
+      <priority>{p.priority}</priority>
+    </url>
+  ))}
+</urlset>

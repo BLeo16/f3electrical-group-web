@@ -1,0 +1,8 @@
+---
+import { SITE } from '../data/site';
+const SITE_URL = SITE.url || 'https://tusitio.com';
+const isProd = import.meta.env.MODE === 'production';
+---
+User-agent: *
+{isProd ? 'Allow: /' : 'Disallow: /'}
+Sitemap: {SITE_URL}/sitemap.xml

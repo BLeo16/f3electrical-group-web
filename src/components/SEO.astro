@@ -1,0 +1,40 @@
+---
+import { branding } from "../data/branding";
+const { title = branding.name, description = branding.tagline, image = '/images/preview.jpg', url = '' , noindex = false } = Astro.props;
+const canonical = url || (Astro.site ?? '');
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": branding.name,
+  "telephone": branding.contact?.phone || '',
+  "email": branding.contact?.email || '',
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": branding.location || ''
+  },
+  "url": canonical || ''
+};
+---
+
+<head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow" />}
+  {canonical ? <link rel="canonical" href={canonical} /> : null}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  {canonical ? <meta property="og:url" content={canonical} /> : null}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+
+  <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+</head>

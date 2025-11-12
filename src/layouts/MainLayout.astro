@@ -2,10 +2,13 @@
 import "../styles/global.css";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
+import SEO from "../components/SEO.astro";
 
 const {
     title = "F3 Electrical Group",
     description = "Empresa especializada en proyectos eléctricos domiciliarios e industriales. Instalación de porteros automáticos, cercas eléctricas, tableros de control y mantenimiento general.",
+    image = "/images/preview.jpg",
+    url = ''
 } = Astro.props;
 ---
 
@@ -13,17 +16,8 @@ const {
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="author" content="F3 Electrical Group" />
-        <meta name="robots" content="index, follow" />
-
-        <!-- Open Graph / SEO -->
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/preview.jpg" />
+        <!-- SEO head -->
+        <SEO title={title} description={description} image={image} url={url} />
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="/images/logo-f3.png" />
