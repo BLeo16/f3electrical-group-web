@@ -13,7 +13,7 @@ type CarouselBaseProps = {
 
 export default function CarouselBase({
     images,
-    interval = 5000,
+    interval = 7000,
     overlay = false,
     children,
     showArrows = true,

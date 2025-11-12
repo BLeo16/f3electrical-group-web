@@ -7,7 +7,7 @@ export default function ServicesCard() {
       className="py-20 bg-[var(--brand-light)] text-center px-6"
     >
       <h2 className="text-3xl font-bold text-[var(--brand-primary)] mb-12">
-        Nuestros Servicios
+        Servicios
       </h2>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">

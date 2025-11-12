@@ -9,6 +9,6 @@ export const branding = {
 };
 
 export const images =[
-  "/images/brand-hero/image1.png",
-  "/images/brand-hero/image2.png",
+  "/images/brand-hero/trabajador1.jpg",
+  "/images/brand-hero/trabajador2.jpg",
 ]

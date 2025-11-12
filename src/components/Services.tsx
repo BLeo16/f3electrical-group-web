@@ -22,7 +22,7 @@ export default function Services() {
                                 images={images}
                                 overlay
                                 interval={5000}
-                                height="h-48"
+                                height="h-64"
                                 className="rounded-t-2xl"
                             />
                         </div>
