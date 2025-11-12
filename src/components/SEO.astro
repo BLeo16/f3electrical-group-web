@@ -1,19 +1,21 @@
 ---
 import { branding } from "../data/branding";
-const { title = branding.name, description = branding.tagline, image = '/images/preview.jpg', url = '' , noindex = false } = Astro.props;
-const canonical = url || (Astro.site ?? '');
+import { SITE } from "../data/site";
+
+const { title = branding.name, description = branding.tagline, image = '/images/preview.jpg', url = '', noindex = false } = Astro.props;
+const canonical = url || Astro.url?.href || SITE.url;
 
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": branding.name,
-  "telephone": branding.contact?.phone || '',
-  "email": branding.contact?.email || '',
+  "name": branding.name || "F3 Electrical Group",
+  "telephone": branding.contact?.phone || "+593993437270",
+  "email": branding.contact?.email || "fernandofloreslm@hotmail.com",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": branding.location || ''
+    "addressLocality": branding.location || "Imbabura, Ecuador"
   },
-  "url": canonical || ''
+  "url": canonical || SITE.url
 };
 ---
 
